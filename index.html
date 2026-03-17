@@ -9,14 +9,14 @@
 
 <script>
 (function(){
-emailjs.init("nv0l8B26-yIKX7G9D"); // your EmailJS public key
+emailjs.init("nv0l8B26-yIKX7G9D");
 })();
 </script>
 
 <style>
 body {
 font-family: Arial, sans-serif;
-background: #e6f4ea; /* light green background */
+background: #e6f4ea;
 padding: 20px;
 }
 
@@ -27,7 +27,7 @@ border-radius: 12px;
 max-width: 550px;
 margin: auto;
 box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-border-top: 6px solid #2e7d32; /* Amazon-style green accent */
+border-top: 6px solid #2e7d32;
 }
 
 h2 {
@@ -59,7 +59,7 @@ box-shadow: 0 0 5px rgba(46,125,50,0.3);
 button {
 width: 100%;
 padding: 12px;
-background: #2e7d32; /* main green */
+background: #2e7d32;
 color: white;
 border: none;
 border-radius: 6px;
@@ -71,7 +71,7 @@ transition: 0.3s;
 }
 
 button:hover {
-background: #1b5e20; /* darker green */
+background: #1b5e20;
 }
 </style>
 </head>
@@ -81,6 +81,8 @@ background: #1b5e20; /* darker green */
 <h2>Book Your Stay</h2>
 
 <form id="booking-form">
+
+<input type="hidden" name="from_name" value="Airport Hotel Booking">
 
 <label>Full Name</label>
 <input type="text" name="name" required>
@@ -101,7 +103,7 @@ background: #1b5e20; /* darker green */
 <input type="number" name="adults" min="1" required>
 
 <label>Number of Children</label>
-<input type="number" name="children" min="0">
+<input type="number" name="children" min="0" required>
 
 <label>Room Type</label>
 <select name="room" required>
@@ -115,13 +117,13 @@ background: #1b5e20; /* darker green */
 <input type="number" name="rooms" min="1" required>
 
 <label>Pets</label>
-<select name="pets">
+<select name="pets" required>
 <option value="No">No</option>
 <option value="Yes">Yes</option>
 </select>
 
 <label>Airport Pickup</label>
-<select name="pickup">
+<select name="pickup" required>
 <option value="No">No</option>
 <option value="Yes">Yes</option>
 </select>
@@ -147,12 +149,14 @@ return;
 }
 
 // Send booking via EmailJS
-emailjs.sendForm("service_m7oizpg", "template_i0bodjd", this)
-.then(function() {
-alert("Booking request sent successfully!");
+emailjs.sendForm("service_vvrreno", "template_i0bodjd", this)
+.then(function(response) {
+console.log("SUCCESS", response);
+alert("Booking received! We will contact you shortly.");
 document.getElementById("booking-form").reset();
 }, function(error) {
-alert("Failed to send booking. Please try again.");
+console.log("FAILED", error);
+alert("Error: " + JSON.stringify(error));
 });
 });
 </script>
