@@ -9,7 +9,7 @@
 
 <script>
 (function(){
-emailjs.init("YOUR_PUBLIC_KEY");
+emailjs.init("nv0l8B26-yIKX7G9D"); // your EmailJS public key
 })();
 </script>
 
@@ -146,7 +146,8 @@ alert("Check-out must be after check-in date.");
 return;
 }
 
-emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+// Send booking via EmailJS
+emailjs.sendForm("service_m7oizpg", "template_i0bodjd", this)
 .then(function() {
 alert("Booking request sent successfully!");
 document.getElementById("booking-form").reset();
