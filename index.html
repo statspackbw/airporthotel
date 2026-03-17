@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airport Hotel Maun Booking</title>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function(){
+emailjs.init("YOUR_PUBLIC_KEY");
+})();
+</script>
+
+<style>
+body {
+font-family: Arial;
+background: #f4f6f8;
+padding: 20px;
+}
+
+form {
+background: #fff;
+padding: 25px;
+border-radius: 10px;
+max-width: 550px;
+margin: auto;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+text-align: center;
+}
+
+label {
+margin-top: 10px;
+display: block;
+font-weight: bold;
+}
+
+input, select, textarea, button {
+width: 100%;
+padding: 10px;
+margin-top: 5px;
+border-radius: 5px;
+border: 1px solid #ccc;
+}
+
+button {
+background: #007BFF;
+color: white;
+border: none;
+margin-top: 15px;
+cursor: pointer;
+font-size: 16px;
+}
+
+button:hover {
+background: #0056b3;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Book Your Stay</h2>
+
+<form id="booking-form">
+
+<label>Full Name</label>
+<input type="text" name="name" required>
+
+<label>Email Address</label>
+<input type="email" name="email" required>
+
+<label>Phone Number (include country code)</label>
+<input type="tel" name="phone" placeholder="+267..." required>
+
+<label>Check-in Date</label>
+<input type="date" name="checkin" required>
+
+<label>Check-out Date</label>
+<input type="date" name="checkout" required>
+
+<label>Number of Adults</label>
+<input type="number" name="adults" min="1" required>
+
+<label>Number of Children</label>
+<input type="number" name="children" min="0">
+
+<label>Room Type</label>
+<select name="room" required>
+<option value="">Select Room Type</option>
+<option>Standard</option>
+<option>Executive</option>
+<option>Family</option>
+</select>
+
+<label>Number of Rooms</label>
+<input type="number" name="rooms" min="1" required>
+
+<label>Pets</label>
+<select name="pets">
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+</select>
+
+<label>Airport Pickup</label>
+<select name="pickup">
+<option value="No">No</option>
+<option value="Yes">Yes</option>
+</select>
+
+<label>Special Requests</label>
+<textarea name="requests" rows="4"></textarea>
+
+<button type="submit">Submit Booking Request</button>
+
+</form>
+
+<script>
+document.getElementById("booking-form").addEventListener("submit", function(e) {
+e.preventDefault();
+
+// Date validation
+const checkin = new Date(this.checkin.value);
+const checkout = new Date(this.checkout.value);
+
+if (checkout <= checkin) {
+alert("Check-out must be after check-in date.");
+return;
+}
+
+emailjs.sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", this)
+.then(function() {
+alert("Booking request sent successfully!");
+document.getElementById("booking-form").reset();
+}, function(error) {
+alert("Failed to send booking. Please try again.");
+});
+});
+</script>
+
+</body>
+</html>
